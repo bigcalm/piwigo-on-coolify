@@ -25,7 +25,7 @@ piwigo-nginx (Coolify Traefik proxy) -> piwigo (PHP-FPM on 127.0.0.1:9000) -> pi
 
 | File | Purpose |
 |------|---------|
-| `docker-compose.yml` | Defines all services and volumes with Coolify magic variables |
+| `docker-compose.yaml` | Defines all services and volumes with Coolify magic variables |
 | `Dockerfile` | Builds the Piwigo application image |
 | `supervisord.conf` | Manages PHP-FPM and Nginx processes in the Piwigo container |
 | `nginx/default.conf` | Nginx site config for the proxy container |
@@ -44,7 +44,7 @@ This project uses Coolify's magic environment variables to auto-generate all sec
 | `SERVICE_URL_PIWIGO-NGINX` | Coolify | Domain URL for Traefik routing |
 | `TZ` | Default `UTC` | Timezone |
 
-No custom networks are defined in docker-compose.yml. Coolify creates its own network automatically and connects Traefik to it. Defining custom networks causes intermittent 504 timeouts.
+No custom networks are defined in docker-compose.yaml. Coolify creates its own network automatically and connects Traefik to it. Defining custom networks causes intermittent 504 timeouts.
 
 ## Piwigo Version
 
