@@ -55,10 +55,6 @@ services:
       - piwigo
     environment:
       - SERVICE_URL_PIWIGO-NGINX
-    volumes:
-      - piwigo-gallery-data:/var/www/html/_data/i:ro
-      - piwigo-local-data:/var/www/html/local:ro
-      - piwigo-upload-data:/var/www/html/upload:ro
     deploy:
       resources:
         limits:
