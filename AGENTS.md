@@ -61,9 +61,10 @@ Four named volumes store persistent data:
 ## Coolify Deployment
 
 - Deploy from Public Repository using `https://github.com/bigcalm/piwigo-on-coolify`
-- `coolify.json` auto-selects the Docker Compose build pack
+- Select **Docker Compose** build pack manually (Coolify defaults to Nixpacks)
 - All passwords are auto-generated — no manual env var configuration needed
-- Assign a domain to `piwigo-nginx` in Coolify's UI for SSL and external access
+- **You must assign a domain to `piwigo-nginx` in Coolify's UI** — without it the service is not accessible externally
+- Coolify configures Traefik routing and SSL automatically based on the assigned domain
 
 ## Common Tasks
 
