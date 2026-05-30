@@ -50,14 +50,15 @@ RUN curl -fsSL "https://piwigo.org/download/dlcounter.php?code=${PIWIGO_VERSION}
     && mv piwigo/.* . 2>/dev/null || true \
     && rmdir piwigo \
     && mkdir -p _data/i local upload \
-    && chown -R www-data:www-data /var/www/html \
-    && apk del curl unzip
+    && chown -R www-data:www-data /var/www/html
 
 COPY nginx/php-fpm.conf /etc/php83/php-fpm.d/www.conf
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/piwigo-default.conf /etc/nginx/conf.d/default.conf
 COPY supervisord.conf /etc/supervisord.conf
+COPY entrypoint.sh /entrypoint.sh
 
 EXPOSE 80
 
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

@@ -27,6 +27,7 @@ Client -> Coolify Traefik -> piwigo-nginx (reverse proxy) -> piwigo (Nginx + PHP
 |------|---------|
 | `docker-compose.yaml` | Defines all services and volumes with Coolify magic variables |
 | `Dockerfile` | Builds the Piwigo application image |
+| `entrypoint.sh` | Generates database config and auto-installs Piwigo on first boot |
 | `supervisord.conf` | Manages PHP-FPM and Nginx processes in the Piwigo container |
 | `nginx/default.conf` | Reverse proxy config for the piwigo-nginx container |
 | `nginx/Dockerfile` | Builds the piwigo-nginx proxy image with config baked in |
@@ -43,6 +44,7 @@ This project uses Coolify's magic environment variables to auto-generate all sec
 | `SERVICE_PASSWORD_MYSQLROOT` | Coolify | MariaDB root password |
 | `SERVICE_PASSWORD_MYSQL` | Coolify | Piwigo database user password |
 | `SERVICE_USER_MYSQL` | Coolify | Piwigo database username |
+| `SERVICE_PASSWORD_PIWIGO_ADMIN` | Coolify | Piwigo admin password |
 | `SERVICE_URL_PIWIGO-NGINX` | Coolify | Domain URL for Traefik routing |
 | `TZ` | Default `UTC` | Timezone |
 
@@ -65,6 +67,7 @@ Four named volumes store persistent data:
 - Deploy from Public Repository using `https://github.com/bigcalm/piwigo-on-coolify`
 - Select **Docker Compose** build pack manually (Coolify defaults to Nixpacks)
 - All passwords are auto-generated — no manual env var configuration needed
+- Piwigo auto-installs on first boot (database tables + admin account) via `entrypoint.sh`
 - **You must assign a domain to `piwigo-nginx` in Coolify's UI** — without it the service is not accessible externally
 - Coolify configures Traefik routing and SSL automatically based on the assigned domain
 
