@@ -1,7 +1,0 @@
-{
-  "version": "1.0",
-  "name": "piwigo-on-coolify",
-  "build": {
-    "type": "docker-compose"
-  }
-}

@@ -25,7 +25,6 @@ piwigo-nginx (Coolify Traefik proxy) -> piwigo (PHP-FPM on 127.0.0.1:9000) -> pi
 
 | File | Purpose |
 |------|---------|
-| `coolify.json` | Tells Coolify to use Docker Compose build pack automatically |
 | `docker-compose.yml` | Defines all services and volumes with Coolify magic variables |
 | `Dockerfile` | Builds the Piwigo application image |
 | `supervisord.conf` | Manages PHP-FPM and Nginx processes in the Piwigo container |
