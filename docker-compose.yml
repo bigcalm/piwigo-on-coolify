@@ -23,8 +23,6 @@ services:
         limits:
           cpus: "1.0"
           memory: 512M
-    networks:
-      - piwigo-network
 
   piwigo:
     build:
@@ -52,8 +50,6 @@ services:
         limits:
           cpus: "2.0"
           memory: 1G
-    networks:
-      - piwigo-network
 
   piwigo-nginx:
     image: nginx:alpine
@@ -73,15 +69,9 @@ services:
         limits:
           cpus: "1.0"
           memory: 256M
-    networks:
-      - piwigo-network
 
 volumes:
   piwigo-db-data:
   piwigo-gallery-data:
   piwigo-local-data:
   piwigo-upload-data:
-
-networks:
-  piwigo-network:
-    driver: bridge

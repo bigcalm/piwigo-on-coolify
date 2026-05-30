@@ -38,13 +38,23 @@ This deployment includes:
    - The `main` branch will be automatically selected
    - Click **Check Repository**
 
-5. **Configure and deploy**
-   - Coolify will detect the `docker-compose.yml` file
-   - Set the required environment variables in Coolify's UI:
+5. **Configure the Build Pack**
+   - **Build Pack**: Change from `Nixpacks` to **`Docker Compose`**
+   - **Base Directory**: Leave as `/`
+   - **Docker Compose Location**: Enter `docker-compose.yml`
+   - **Port**: This field is ignored for Docker Compose deployments — leave it as-is
+   - Click **Continue**
+
+6. **Set environment variables**
+   - Coolify will parse your `docker-compose.yml` and show detected variables
+   - Set the required variables:
      - `MYSQL_ROOT_PASSWORD` — set a strong password
      - `MYSQL_PASSWORD` — set a strong password for the Piwigo database user
-   - (Optional) Assign a domain to the `piwigo-nginx` service for SSL
-   - Click **Deploy**
+   - Optional: adjust `APP_PORT` if you need a different port
+
+7. **Deploy**
+   - Click **Deploy** to start the deployment
+   - (Optional) Assign a domain to the `piwigo-nginx` service for automatic SSL
 
 ### Local Development
 

@@ -1,5 +1,10 @@
 # AGENTS.md
 
+## Agent Rules
+
+- **NEVER commit or push changes automatically.** Always wait for explicit user instruction before running `git commit` or `git push`.
+- Present diffs to the user and ask for confirmation before any git operations.
+
 ## Project Overview
 
 This project deploys Piwigo photo gallery on Coolify using Docker Compose. It consists of three services: Piwigo (PHP-FPM + Nginx via supervisord), MariaDB, and a front-facing Nginx proxy.
