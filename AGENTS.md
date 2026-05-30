@@ -44,7 +44,7 @@ This project uses Coolify's magic environment variables to auto-generate all sec
 | `SERVICE_PASSWORD_MYSQLROOT` | Coolify | MariaDB root password |
 | `SERVICE_PASSWORD_MYSQL` | Coolify | Piwigo database user password |
 | `SERVICE_USER_MYSQL` | Coolify | Piwigo database username |
-| `SERVICE_PASSWORD_PIWIGO_ADMIN` | Coolify | Piwigo admin password |
+| `SERVICE_PASSWORD_PIWIGO` | Coolify | Piwigo admin password |
 | `SERVICE_URL_PIWIGO-NGINX` | Coolify | Domain URL for Traefik routing |
 | `TZ` | Default `UTC` | Timezone |
 

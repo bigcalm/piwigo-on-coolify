@@ -38,7 +38,7 @@ services:
       PIWIGO_DB_PASSWORD: ${SERVICE_PASSWORD_MYSQL}
       PIWIGO_DB_PREFIX: piwigo_
       PIWIGO_ADMIN_USER: ${PIWIGO_ADMIN_USER:-admin}
-      PIWIGO_ADMIN_PASSWORD: ${SERVICE_PASSWORD_PIWIGO_ADMIN}
+      PIWIGO_ADMIN_PASSWORD: ${SERVICE_PASSWORD_PIWIGO}
       PIWIGO_ADMIN_EMAIL: ${PIWIGO_ADMIN_EMAIL:-admin@example.com}
     volumes:
       - piwigo-gallery-data:/var/www/html/_data/i
