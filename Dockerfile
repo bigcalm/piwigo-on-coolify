@@ -1,15 +1,32 @@
 FROM php:8.3-fpm-alpine
 
+ARG COOLIFY_FQDN
+ARG SERVICE_FQDN_PIWIGO_NGINX
+ARG SERVICE_URL_PIWIGO_NGINX
+ARG SERVICE_PASSWORD_MYSQLROOT
+ARG SERVICE_USER_MYSQL
+ARG SERVICE_PASSWORD_MYSQL
+ARG TZ
+
+# Runtime dependencies
 RUN apk add --no-cache \
     nginx \
     supervisor \
+    icu-libs \
     libzip \
     libpng \
     libwebp \
     freetype \
-    libjpeg-turbo \
-    icu \
-    exif \
+    libjpeg-turbo
+
+# Build dependencies + PHP extensions
+RUN apk add --no-cache --virtual .build-deps \
+    freetype-dev \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    libwebp-dev \
+    icu-dev \
+    libzip-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j$(nproc) \
         pdo_mysql \
@@ -17,7 +34,8 @@ RUN apk add --no-cache \
         gd \
         exif \
         zip \
-        opcache
+        opcache \
+    && apk del .build-deps
 
 RUN apk add --no-cache curl unzip
 
@@ -25,7 +43,7 @@ ENV PIWIGO_VERSION=16.4.0
 
 WORKDIR /var/www/html
 
-RUN curl -fsSL "https://github.com/Piwigo/Piwigo/releases/download/${PIWIGO_VERSION}/Piwigo-${PIWIGO_VERSION}.zip" -o piwigo.zip \
+RUN curl -fsSL "https://piwigo.org/download/dlcounter.php?code=${PIWIGO_VERSION}" -o piwigo.zip \
     && unzip piwigo.zip \
     && rm piwigo.zip \
     && mkdir -p _data/i local upload \
