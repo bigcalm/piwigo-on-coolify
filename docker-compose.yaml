@@ -48,14 +48,14 @@ services:
           memory: 1G
 
   piwigo-nginx:
-    image: nginx:alpine
+    build:
+      context: ./nginx
     restart: unless-stopped
     depends_on:
       - piwigo
     environment:
       - SERVICE_URL_PIWIGO-NGINX
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
       - piwigo-gallery-data:/var/www/html/_data/i:ro
       - piwigo-local-data:/var/www/html/local:ro
       - piwigo-upload-data:/var/www/html/upload:ro

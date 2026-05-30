@@ -29,6 +29,7 @@ piwigo-nginx (Coolify Traefik proxy) -> piwigo (PHP-FPM on 127.0.0.1:9000) -> pi
 | `Dockerfile` | Builds the Piwigo application image |
 | `supervisord.conf` | Manages PHP-FPM and Nginx processes in the Piwigo container |
 | `nginx/default.conf` | Nginx site config for the proxy container |
+| `nginx/Dockerfile` | Builds the piwigo-nginx proxy image with config baked in |
 | `nginx/nginx.conf` | Nginx main config for the proxy container |
 | `nginx/php-fpm.conf` | PHP-FPM pool config (used inside Piwigo container) |
 
