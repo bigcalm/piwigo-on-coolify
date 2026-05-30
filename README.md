@@ -21,8 +21,41 @@ This deployment includes:
 
 ## Quick Start
 
-1. Clone or fork this repository
-2. Copy the environment file and configure it:
+### Deploy on Coolify (from public GitHub repo)
+
+1. **Create a new resource**
+   - From your Coolify dashboard, select your project
+   - Click **+ New** to create a new resource
+
+2. **Select Public Repository**
+   - Choose **Public Repository** from the available resource types
+
+3. **Choose your server**
+   - Select the server where you want to deploy Piwigo
+
+4. **Enter the repository URL**
+   - Paste: `https://github.com/bigcalm/piwigo-on-coolify`
+   - The `main` branch will be automatically selected
+   - Click **Check Repository**
+
+5. **Configure and deploy**
+   - Coolify will detect the `docker-compose.yml` file
+   - Set the required environment variables in Coolify's UI:
+     - `MYSQL_ROOT_PASSWORD` — set a strong password
+     - `MYSQL_PASSWORD` — set a strong password for the Piwigo database user
+   - (Optional) Assign a domain to the `piwigo-nginx` service for SSL
+   - Click **Deploy**
+
+### Local Development
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/bigcalm/piwigo-on-coolify.git
+   cd piwigo-on-coolify
+   ```
+
+2. Copy and configure the environment file:
 
    ```bash
    cp .env.example .env
@@ -35,16 +68,17 @@ This deployment includes:
    MYSQL_PASSWORD=your_secure_piwigo_password
    ```
 
-4. Deploy on Coolify:
-   - Add a new resource in Coolify
-   - Select "Docker Compose" as the deployment type
-   - Point to this repository
-   - Configure the environment variables
-   - Deploy
+4. Start the services:
+
+   ```bash
+   docker compose up -d --build
+   ```
 
 ## Configuration
 
 ### Environment Variables
+
+Coolify automatically detects variables from `docker-compose.yml` and displays them in the UI.
 
 | Variable | Description | Default |
 |----------|-------------|---------|
@@ -66,7 +100,9 @@ The following persistent volumes are created:
 
 ## First Setup
 
-After deployment, navigate to your Piwigo instance URL to complete the installation wizard. Use the database credentials from your `.env` file:
+After deployment, navigate to your Piwigo instance URL. If you assigned a domain in Coolify, use that URL. Otherwise, use your server IP with the configured port.
+
+Complete the Piwigo installation wizard using these database credentials:
 
 - **Database host**: `piwigo-db`
 - **Database port**: `3306`
