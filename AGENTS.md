@@ -12,7 +12,7 @@ This project deploys Piwigo photo gallery on Coolify using Docker Compose. It co
 ## Architecture
 
 ```
-piwigo-nginx (Coolify Traefik proxy) -> piwigo (PHP-FPM on 127.0.0.1:9000) -> piwigo-db (MariaDB on port 3306)
+Client -> Coolify Traefik -> piwigo-nginx (reverse proxy) -> piwigo (Nginx + PHP-FPM) -> piwigo-db (MariaDB)
 ```
 
 ### Services
@@ -28,9 +28,10 @@ piwigo-nginx (Coolify Traefik proxy) -> piwigo (PHP-FPM on 127.0.0.1:9000) -> pi
 | `docker-compose.yaml` | Defines all services and volumes with Coolify magic variables |
 | `Dockerfile` | Builds the Piwigo application image |
 | `supervisord.conf` | Manages PHP-FPM and Nginx processes in the Piwigo container |
-| `nginx/default.conf` | Nginx site config for the proxy container |
+| `nginx/default.conf` | Reverse proxy config for the piwigo-nginx container |
 | `nginx/Dockerfile` | Builds the piwigo-nginx proxy image with config baked in |
-| `nginx/nginx.conf` | Nginx main config for the proxy container |
+| `nginx/nginx.conf` | Nginx main config (used inside Piwigo container) |
+| `nginx/piwigo-default.conf` | Nginx site config serving PHP-FPM (used inside Piwigo container) |
 | `nginx/php-fpm.conf` | PHP-FPM pool config (used inside Piwigo container) |
 
 ## Coolify Magic Variables
