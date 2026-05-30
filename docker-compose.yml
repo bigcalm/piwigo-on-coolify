@@ -1,15 +1,12 @@
-version: "3.8"
-
 services:
   piwigo-db:
     image: mariadb:11
-    container_name: piwigo-db
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${SERVICE_PASSWORD_MYSQLROOT}
+      MYSQL_DATABASE: piwigo
+      MYSQL_USER: ${SERVICE_USER_MYSQL}
+      MYSQL_PASSWORD: ${SERVICE_PASSWORD_MYSQL}
     volumes:
       - piwigo-db-data:/var/lib/mysql
     healthcheck:
@@ -28,7 +25,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: piwigo
     restart: unless-stopped
     depends_on:
       piwigo-db:
@@ -37,9 +33,9 @@ services:
       TZ: ${TZ:-UTC}
       PIWIGO_DB_HOST: piwigo-db
       PIWIGO_DB_PORT: 3306
-      PIWIGO_DB_NAME: ${MYSQL_DATABASE}
-      PIWIGO_DB_USER: ${MYSQL_USER}
-      PIWIGO_DB_PASSWORD: ${MYSQL_PASSWORD}
+      PIWIGO_DB_NAME: piwigo
+      PIWIGO_DB_USER: ${SERVICE_USER_MYSQL}
+      PIWIGO_DB_PASSWORD: ${SERVICE_PASSWORD_MYSQL}
       PIWIGO_DB_PREFIX: piwigo_
     volumes:
       - piwigo-gallery-data:/var/www/html/_data/i
@@ -53,12 +49,11 @@ services:
 
   piwigo-nginx:
     image: nginx:alpine
-    container_name: piwigo-nginx
     restart: unless-stopped
     depends_on:
       - piwigo
-    ports:
-      - "${APP_PORT:-8080}:80"
+    environment:
+      - SERVICE_URL_PIWIGO-NGINX
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
       - piwigo-gallery-data:/var/www/html/_data/i:ro
