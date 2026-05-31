@@ -64,7 +64,7 @@ Four named volumes store persistent data:
 
 ## Coolify Deployment
 
-- Deploy from Public Repository using `https://github.com/bigcalm/piwigo-on-coolify`
+- Deploy from Public Repository using `https://github.com/bigcalm/coolify-app-piwigo`
 - Select **Docker Compose** build pack manually (Coolify defaults to Nixpacks)
 - All passwords are auto-generated — no manual env var configuration needed
 - Piwigo auto-installs on first boot (database tables + admin account) via `entrypoint.sh`
